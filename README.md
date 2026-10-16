@@ -12,7 +12,15 @@ v11.20.0
 
 v20.3.40
 
-## Development server
+## Development/QA/Mock server
+
+Run `ng serve --open --configuration=mock/qa` for a dev server and navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+to depuration (using vscode):
+
+`npm run start-mock` then f5
+
+## Production server
 
 Run `ng serve --open` for a dev server and navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
