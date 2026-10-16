@@ -1,0 +1,1 @@
+export type Role = 'ADMIN' | 'SUPPORT_AGENT' | 'USER_REQUEST';

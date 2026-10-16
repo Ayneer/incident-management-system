@@ -1,0 +1,1 @@
+export type IncidentCategory = 'RED' | 'HARDWARE' | 'SOFTWARE' | 'CREDENTIALS' | 'CIBE' | 'OTHER';
