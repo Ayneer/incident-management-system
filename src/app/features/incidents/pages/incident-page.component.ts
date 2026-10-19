@@ -14,12 +14,13 @@ import { IncidentCardComponent } from '../componets/incident-card/incident-card.
 import { IncidentSelect } from '../../../core/types/incident-select.type';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IncidentModalDetailComponent } from '../componets/modals/incident-modal-detail.component';
+import { FocusStyleDirective } from '../../../shared/directives/focus/focus-style.directive';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'incident-page-component',
   templateUrl: 'incident-page.component.html',
-  imports: [CommonModule, IncidentCardComponent],
+  imports: [CommonModule, IncidentCardComponent, ],
 })
 export class IncidentPageComponent implements OnInit {
   private _getIncidentsUseCase = inject(GetIncidentsCaseUse);

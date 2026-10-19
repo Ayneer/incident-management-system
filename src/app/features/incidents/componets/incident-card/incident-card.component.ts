@@ -4,12 +4,14 @@ import { IncidentPriority } from '../../../../core/types/incident-priority.type'
 import { IncidentDatePipe } from '../../../../shared/pipes/incident-date.pipe';
 import { Incident } from '../../../../core/interfaces/incident.interface';
 import { IncidentSelect } from '../../../../core/types/incident-select.type';
+import { FocusStyleDirective } from '../../../../shared/directives/focus/focus-style.directive';
+import { CriticalIncidenDirective } from '../../../../shared/directives/critical-incident/critical-incident.directive';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'incident-card-component',
   templateUrl: 'incident-card.component.html',
-  imports: [CommonModule, IncidentDatePipe],
+  imports: [CommonModule, IncidentDatePipe, FocusStyleDirective, CriticalIncidenDirective],
 })
 export class IncidentCardComponent {
   incident = input.required<Incident>();

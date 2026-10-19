@@ -1,4 +1,4 @@
-<div class="card h-100">
+<div class="card h-100" tabindex="0" incidentFocusStyle [criticalIncident]="incident().priority == 'HIGH'">
   <div class="card-body d-flex flex-column flex-grow-1">
     <span class="text-muted small fst-italic mb-2"
       >Last update: {{ incident().updateAt | incidentDate }}</span
