@@ -1,0 +1,73 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+  TemplateRef,
+  viewChild,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GetIncidentsCaseUse } from '../../../core/use-cases/get-incidents.use-case';
+import { Incident } from '../../../core/interfaces/incident.interface';
+import { IncidentCardComponent } from '../componets/incident-card.component';
+import { IncidentSelect } from '../../../core/types/incident-select.type';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IncidentModalDetailComponent } from './modals/incident-modal-detail.component';
+
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'incident-page-component',
+  templateUrl: 'incident-page.component.html',
+  imports: [CommonModule, IncidentCardComponent],
+})
+export class IncidentPageComponent implements OnInit {
+  private _getIncidentsUseCase = inject(GetIncidentsCaseUse);
+  private readonly modalService = inject(NgbModal);
+  readonly sureModalRef = viewChild<TemplateRef<NgbActiveModal>>('sureModal');
+  incidents = signal<Incident[]>([]);
+  selectedIncident = signal<Incident | null>(null);
+
+  ngOnInit(): void {
+    this._getIncidentsUseCase.execute().subscribe({
+      next: (incidents: Incident[]) => this.incidents.set(incidents),
+      error: (error) => console.log('error: ', error),
+    });
+  }
+
+  onClick(select: IncidentSelect) {
+    this.selectedIncident.set(select.incident);
+    switch (select.action) {
+      case 'DELETE': {
+        this.modalService.open(this.sureModalRef(), { centered: true });
+        break;
+      }
+
+      case 'SELECT': {
+        const incidentModalRef = this.modalService.open(IncidentModalDetailComponent, {
+          centered: true,
+          size: 'lg',
+        });
+        incidentModalRef.componentInstance.incident.set(select.incident);
+        break;
+      }
+
+      default: {
+        const incidentModalRef = this.modalService.open(IncidentModalDetailComponent, {
+          centered: true,
+          size: 'lg',
+        });
+        incidentModalRef.componentInstance.incident.set(select.incident);
+        break;
+      }
+    }
+  }
+
+  closeModal(modal: NgbActiveModal) {
+    modal.close();
+  }
+
+  dismissModal(modal: NgbActiveModal) {
+    modal.dismiss();
+  }
+}

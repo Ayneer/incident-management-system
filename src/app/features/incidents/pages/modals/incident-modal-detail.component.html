@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <div class="row">
+    <div class="col-sm-12">
+      <span class="badge badge-primary mb-2">{{ incident()?.id }}</span>
+    </div>
+    <div class="col-sm-12">
+      <h4 class="modal-title">{{ incident()?.title }}</h4>
+    </div>
+  </div>
+</div>
+<div class="modal-body">
+  <span class="text-muted small fst-italic mb-2">Create by: {{ incident()?.reporterId }}</span>
+  <br />
+  <span class="text-muted small fst-italic mb-2"
+    >Assigned to: {{ incident()?.assignedAgentId }}</span
+  >
+  <br />
+  <span class="text-muted small fst-italic mb-2"
+    >Create at: {{ incident()?.createdAt | incidentDate }}</span
+  >
+  <br />
+  <span class="text-muted small fst-italic mb-2"
+    >Update at: {{ incident()?.updateAt | incidentDate }}</span
+  >
+  <br />
+  <br />
+  <p><strong>Status:</strong> {{ incident()?.status }}</p>
+  <p><strong>Category:</strong> {{ incident()?.category }}</p>
+  <p><strong>Priority:</strong> {{ incident()?.priority }}</p>
+  <p><strong>Description:</strong> {{ incident()?.description }}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Close</button>
+</div>

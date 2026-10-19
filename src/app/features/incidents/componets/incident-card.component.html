@@ -1,0 +1,36 @@
+<div class="card h-100">
+  <div class="card-body d-flex flex-column flex-grow-1">
+    <span class="text-muted small fst-italic mb-2"
+      >Last update: {{ incident().updateAt | incidentDate }}</span
+    >
+    <h5 class="card-title">
+      {{ incident().title }}
+    </h5>
+    <h6>
+      <span class="badge badge-{{ getAlertTypeByPriority(incident().priority) }} mb-2">{{
+        incident().priority
+      }}</span>
+    </h6>
+
+    <p class="card-text">
+      {{ incident().description }}
+    </p>
+    <div class="d-flex mt-auto align-items-end">
+      <button
+        type="button"
+        class="btn btn-primary btn-sm align-self-start"
+        (click)="onClickCard({ incident: incident(), action: 'SELECT', })"
+      >
+        Details
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger ms-3 btn-sm align-self-start"
+        (click)="onClickCard({ incident: incident(), action: 'DELETE', })"
+      >
+        Delete
+      </button>
+      <span class="badge badge-light ms-auto">{{ incident().status }}</span>
+    </div>
+  </div>
+</div>

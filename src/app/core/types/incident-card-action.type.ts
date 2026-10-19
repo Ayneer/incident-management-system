@@ -1,0 +1,1 @@
+export type IncidentCardAction = 'SELECT' | 'DELETE';
