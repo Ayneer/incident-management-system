@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IncidentPriority } from '../../../core/types/incident-priority.type';
-import { IncidentDatePipe } from '../../../shared/pipes/incident-date.pipe';
-import { Incident } from '../../../core/interfaces/incident.interface';
-import { IncidentSelect } from '../../../core/types/incident-select.type';
+import { IncidentPriority } from '../../../../core/types/incident-priority.type';
+import { IncidentDatePipe } from '../../../../shared/pipes/incident-date.pipe';
+import { Incident } from '../../../../core/interfaces/incident.interface';
+import { IncidentSelect } from '../../../../core/types/incident-select.type';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

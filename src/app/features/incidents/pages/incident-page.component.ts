@@ -10,10 +10,10 @@ import {
 import { CommonModule } from '@angular/common';
 import { GetIncidentsCaseUse } from '../../../core/use-cases/get-incidents.use-case';
 import { Incident } from '../../../core/interfaces/incident.interface';
-import { IncidentCardComponent } from '../componets/incident-card.component';
+import { IncidentCardComponent } from '../componets/incident-card/incident-card.component';
 import { IncidentSelect } from '../../../core/types/incident-select.type';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IncidentModalDetailComponent } from './modals/incident-modal-detail.component';
+import { IncidentModalDetailComponent } from '../componets/modals/incident-modal-detail.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
