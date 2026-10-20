@@ -7,7 +7,7 @@
       {{ incident().title }}
     </h5>
     <h6>
-      <span class="badge badge-{{ getAlertTypeByPriority(incident().priority) }} mb-2">{{
+      <span [badgeIncidentPriority]="incident().priority" class="badge mb-2">{{
         incident().priority
       }}</span>
     </h6>

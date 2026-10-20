@@ -1,1 +1,44 @@
-<div>Dashboard</div>
+<div class="d-flex">
+  <h2 class="mb-4">Dashboard page</h2>
+  <button type="button" class="btn btn-primary btn-lg ms-auto align-self-start">
+    New incident
+  </button>
+</div>
+<h4 class="mb-4">Incidents by priority</h4>
+<ul class="list-group mt-3">
+  @for (incidentSummary of incidentSignalStore.incidentSummary() | keyvalue; track
+  incidentSummary.key) {
+  <li
+    class="list-group-item d-flex justify-content-between align-items-center btn btn-link"
+    (click)="onSummaryListClick(incidentSummary.key)"
+  >
+    @if (incidentSummary.key === 'total') {
+    <strong>{{ incidentSummary.key.toUpperCase() }}</strong>
+    } @else {
+    {{ incidentSummary.key.toUpperCase() }}
+    }
+    <span [badgeIncidentPriority]="incidentSummary.key" class="badge badge-pill mb-2">
+      {{ incidentSummary.value }}
+    </span>
+  </li>
+  }
+</ul>
+<h4 class="mt-4">Incidents by status</h4>
+<ul class="list-group mt-3">
+  @for (incidentSummary of incidentSignalStore.incidentSummaryByStatus() | keyvalue; track
+  incidentSummary.key) {
+  <li
+    class="list-group-item d-flex justify-content-between align-items-center btn btn-link"
+    (click)="onSummaryStatusListClick(incidentSummary.key)"
+  >
+    @if (incidentSummary.key === 'total') {
+    <strong>{{ incidentSummary.key.toUpperCase() }}</strong>
+    } @else {
+    {{ incidentSummary.key.toUpperCase() }}
+    }
+    <span class="badge badge-primary badge-pill mb-2">
+      {{ incidentSummary.value }}
+    </span>
+  </li>
+  }
+</ul>

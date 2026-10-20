@@ -2,19 +2,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit,
   signal,
   TemplateRef,
   viewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GetIncidentsCaseUse } from '../../../core/use-cases/get-incidents.use-case';
 import { Incident } from '../../../core/interfaces/incident.interface';
 import { IncidentCardComponent } from '../componets/incident-card/incident-card.component';
 import { IncidentSelect } from '../../../core/types/incident-select.type';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IncidentModalDetailComponent } from '../componets/modals/incident-modal-detail.component';
-import { FocusStyleDirective } from '../../../shared/directives/focus/focus-style.directive';
+import { IncidentSignalStore } from '../../../core/store/incident-signal.store';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,19 +20,12 @@ import { FocusStyleDirective } from '../../../shared/directives/focus/focus-styl
   templateUrl: 'incident-page.component.html',
   imports: [CommonModule, IncidentCardComponent, ],
 })
-export class IncidentPageComponent implements OnInit {
-  private _getIncidentsUseCase = inject(GetIncidentsCaseUse);
+export class IncidentPageComponent  {
+  private _incidentSignalStore = inject(IncidentSignalStore);
   private readonly modalService = inject(NgbModal);
   readonly sureModalRef = viewChild<TemplateRef<NgbActiveModal>>('sureModal');
-  incidents = signal<Incident[]>([]);
+  incidents = this._incidentSignalStore.filteredIncidents;
   selectedIncident = signal<Incident | null>(null);
-
-  ngOnInit(): void {
-    this._getIncidentsUseCase.execute().subscribe({
-      next: (incidents: Incident[]) => this.incidents.set(incidents),
-      error: (error) => console.log('error: ', error),
-    });
-  }
 
   onClick(select: IncidentSelect) {
     this.selectedIncident.set(select.incident);
