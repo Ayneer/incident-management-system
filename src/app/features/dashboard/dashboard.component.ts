@@ -19,10 +19,12 @@ export class DashboardComponent implements OnInit {
   private _router = inject(Router);
 
   ngOnInit(): void {
-    this._getIncidentUseCase.execute().subscribe({
-      next: (incidents) => this.incidentSignalStore.setIncidents(incidents),
-      error: (error) => console.log(error),
-    });
+    if (this.incidentSignalStore.incidents().length === 0) {
+      this._getIncidentUseCase.execute().subscribe({
+        next: (incidents) => this.incidentSignalStore.setIncidents(incidents),
+        error: (error) => console.log(error),
+      });
+    }
   }
 
   onSummaryListClick(priority: string) {
@@ -38,5 +40,9 @@ export class DashboardComponent implements OnInit {
       this.incidentSignalStore.setStatusFilter(_status.toUpperCase() as IncidentStatus);
     }
     this._router.navigate(['/incident']);
+  }
+
+  goToNewIncidentPage() {
+    this._router.navigate(['/new-incident']);
   }
 }

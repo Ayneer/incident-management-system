@@ -1,0 +1,62 @@
+<form [formGroup]="form" class="form-control">
+  <div class="form-group mt-3 mb-3">
+    <label for="title">Title</label>
+    <input
+      formControlName="title"
+      id="title"
+      class="form-control"
+      type="text"
+      placeholder="Incident title"
+      aria-label="Title"
+    />
+    @if (form.controls.title.touched && form.controls.title.hasError('required')) {
+    <span class="error-message">Este campo es obligatorio.</span>
+    }
+  </div>
+
+  <div class="form-group mt-3 mb-3">
+    <label for="description"> Description</label>
+    <textarea
+      formControlName="description"
+      id="description"
+      class="form-control"
+      type="text"
+      placeholder="Incident description"
+      aria-label="Description"
+    ></textarea>
+    @if (form.controls.description.touched && form.controls.description.hasError('required')) {
+    <span class="error-message">Este campo es obligatorio.</span>
+    }
+  </div>
+
+  <div class="form-group mt-3 mb-3">
+    <label for="category"> Category</label>
+    <select formControlName="category" id="category" class="form-control">
+      @for (category of categories; track category) {
+      <option value="{{ category }}">{{ category }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="form-group mt-3 mb-3">
+    <label for="priority">Priority</label>
+    <select formControlName="priority" id="priority" class="form-control">
+      @for (priority of priorities; track priority) {
+      <option value="{{ priority }}">{{ priority }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="form-group mt-3 mb-3">
+    <label for="status">Status</label>
+    <select formControlName="status" id="status" class="form-control">
+      @for (status of status; track status) {
+      <option value="{{ status }}">{{ status }}</option>
+      }
+    </select>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="form.invalid" (click)="createIncident()">
+    Create
+  </button>
+</form>

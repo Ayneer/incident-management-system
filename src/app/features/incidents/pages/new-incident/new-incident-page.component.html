@@ -1,0 +1,15 @@
+<div class="d-flex">
+  <h2 class="mb-4">New incident page</h2>
+  <button
+    type="button"
+    class="btn btn-primary btn-lg ms-auto align-self-start"
+    (click)="goToMyIncdents()"
+  >
+    My incidents
+  </button>
+</div>
+<h4 class="mb-4">Incidents form</h4>
+@if (alert()) {
+<ngb-alert [type]="alert()?.type ?? 'success'" (closed)="close()">{{ alert()?.message }}</ngb-alert>
+}
+<new-incident-form (newIncidentEvent)="createIncident($event)" />

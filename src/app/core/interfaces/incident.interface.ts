@@ -10,7 +10,7 @@ export interface Incident {
     priority: IncidentPriority;
     status: IncidentStatus;
     reporterId: string;
-    assignedAgentId: string;
+    assignedAgentId: string | undefined;
     createdAt: string;
     updateAt: string;
 }

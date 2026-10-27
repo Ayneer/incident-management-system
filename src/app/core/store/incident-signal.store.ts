@@ -107,6 +107,8 @@ export class IncidentSignalStore {
     );
   });
 
+  readonly incidentTotal: Signal<number> = computed(() => this._incidents().length);
+
   setSearchString(searchString: string): void {
     this._searchString.set(searchString);
   }
