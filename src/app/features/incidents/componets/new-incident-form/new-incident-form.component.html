@@ -56,6 +56,28 @@
     </select>
   </div>
 
+  <div formArrayName="tag" class="form-group mt-3 mb-3">
+    <label for="tag">Tag</label>
+    @for (tagFormArray of tagFormArray.controls; track tagFormArray) {
+    <input
+      [formControlName]="$index"
+      id="{{ 'tag-' + $index }}"
+      class="form-control"
+      type="text"
+      placeholder="Incident tag name"
+      aria-label="{{ 'tag-' + $index }}"
+    />
+    <button class="btn btn-primary" (click)="deleteTag($index)">Delete</button>
+    }
+  </div>
+
+  <div class="mb-4">
+    <button class="btn btn-primary" [disabled]="isFullTag" (click)="addTag()">Add tag</button>
+  </div>
+  @if (form.controls.tag.hasError('duplicated')) {
+  <span class="error-message">Tienes un tag repetido, por favor corrigelo.</span>
+  }
+
   <button class="btn btn-primary" [disabled]="form.invalid" (click)="createIncident()">
     Create
   </button>
